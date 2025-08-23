@@ -4,9 +4,15 @@ import { View, FlatList } from "react-native";
 import SectionHeader from "@components/SectionHeader";
 import ProductCard from "@components/ProductCard";
 import { LinearGradient } from "expo-linear-gradient";
-import { SCALE, FLASH_ITEM_WIDTH } from "@features/home/constants";
+import { SCALE, FLASH_ITEM_WIDTH, HOME_ASSETS } from "@features/home/constants";
 import { useHomeScreen } from "@features/home/hooks";
 import { SECTION_TITLES, UI_TEXT } from "@features/home/sectionTitles";
+import { homeStyles } from "@features/home/styles";
+import {
+  renderProductCard,
+  renderMiniProductCard,
+  renderFeaturedArticle,
+} from "@features/home/helpers";
 import HomeHeader from "@components/HomeHeader";
 import Countdown from "@components/Countdown";
 
@@ -46,9 +52,7 @@ export default function HomeScreen() {
           <HomeHeader />
 
           {/* Sub banner (giảm giá 35%) */}
-          <SubBanner
-            source={require("../../assets/banners/111f441263cc356856a3d5519edba39600c39b2e.png")}
-          />
+          <SubBanner source={HOME_ASSETS.banners.subBanner} />
 
           {/* Danh mục tiêu biểu */}
           <SectionHeader
@@ -61,12 +65,11 @@ export default function HomeScreen() {
           <CategoryIconStrip onCategoryPress={handleCategoryPress} />
 
           {/* Banner lớn (slide - mua 10 tặng 2) */}
-          <View
-            style={{ paddingHorizontal: 12, marginTop: 8, marginBottom: 8 }}>
+          <View style={homeStyles.bannerContainer}>
             <BannerCarousel
               sources={[
-                require("../../assets/banners/374b719df0c2fd9721df208e12a37f169addfc7e.png"),
-                require("../../assets/banners/111f441263cc356856a3d5519edba39600c39b2e.png"),
+                HOME_ASSETS.banners.mainBanner1,
+                HOME_ASSETS.banners.mainBanner2,
               ]}
             />
           </View>
@@ -76,7 +79,7 @@ export default function HomeScreen() {
             colors={["rgba(255,237,217,0.2)", "rgba(255,232,206,0.3)"]}
             start={{ x: 1, y: 0 }}
             end={{ x: 0, y: 0.1 }}
-            style={{ borderRadius: 12, marginHorizontal: 0 }}>
+            style={homeStyles.flashSaleContainer}>
             <SectionHeader
               icon={SECTION_TITLES.flashSale.icon}
               title={SECTION_TITLES.flashSale.title}
@@ -98,15 +101,13 @@ export default function HomeScreen() {
               }}
               renderItem={({ item, index }) => (
                 <ProductCard
-                  index={index}
-                  width={FLASH_ITEM_WIDTH}
-                  source={item.source}
-                  name={item.name}
-                  price={item.price}
-                  oldPrice={item.oldPrice}
-                  progress={0.7}
-                  soldText={UI_TEXT.productInfo.soldText}
-                  variant="flashSale"
+                  {...renderProductCard({
+                    item,
+                    index,
+                    variant: "flashSale",
+                    progress: 0.7,
+                    soldText: UI_TEXT.productInfo.soldText,
+                  })}
                 />
               )}
             />
@@ -143,16 +144,14 @@ export default function HomeScreen() {
               columnGap: 8 * SCALE,
             }}
             renderItem={({ item, index }) => (
-              <View style={{ width: FLASH_ITEM_WIDTH }}>
+              <View style={homeStyles.productItemWrapper}>
                 <ProductCard
-                  index={index}
-                  width={FLASH_ITEM_WIDTH}
-                  source={item.source}
-                  name={item.name}
-                  price={item.price}
-                  oldPrice={item.oldPrice}
-                  variant="flashSale"
-                  badgeText={UI_TEXT.productInfo.onlyOneLeft}
+                  {...renderProductCard({
+                    item,
+                    index,
+                    variant: "flashSale",
+                    badgeText: UI_TEXT.productInfo.onlyOneLeft,
+                  })}
                 />
               </View>
             )}
@@ -165,33 +164,24 @@ export default function HomeScreen() {
           <SectionHeader
             icon={SECTION_TITLES.forYou.icon}
             title={SECTION_TITLES.forYou.title}
-            titleStyle={{ fontSize: 16, fontWeight: "600", lineHeight: 24 }}
+            titleStyle={homeStyles.forYouTitle}
           />
-          <View style={{ paddingHorizontal: 12 }}>
-            <View style={{ width: 369, height: 327, gap: 12 }}>
+          <View style={homeStyles.forYouContainer}>
+            <View style={homeStyles.forYouWrapper}>
               {/* Row: left banner + product list */}
-              <View
-                style={{
-                  flexDirection: "row",
-                  gap: 8,
-                  width: 369,
-                  height: 291,
-                }}>
+              <View style={homeStyles.forYouRow}>
                 <QualityFilterCard />
-                <View style={{ flex: 1 }}>
+                <View style={homeStyles.forYouProductList}>
                   <FlatList
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     data={recommendedProducts}
                     keyExtractor={(it) => it.id + "rr"}
-                    ItemSeparatorComponent={() => <View style={{ width: 8 }} />}
+                    ItemSeparatorComponent={() => (
+                      <View style={homeStyles.itemSpacing} />
+                    )}
                     renderItem={({ item }) => (
-                      <MiniProductCard
-                        source={item.source}
-                        name={item.name}
-                        price={item.price}
-                        oldPrice={item.oldPrice}
-                      />
+                      <MiniProductCard {...renderMiniProductCard({ item })} />
                     )}
                   />
                 </View>
@@ -200,28 +190,27 @@ export default function HomeScreen() {
           </View>
 
           {/* Hàng mới về */}
-          <View
-            style={{
-              backgroundColor: "rgba(2, 95, 202, 1)",
-            }}>
+          <View style={homeStyles.newArrivalsContainer}>
             <SectionHeader
               icon={SECTION_TITLES.newArrivals.icon}
               title={SECTION_TITLES.newArrivals.title}
-              titleStyle={{ color: "#FFFFFF" }}
+              titleStyle={homeStyles.newArrivalsTitle}
             />
-            <View style={{ paddingHorizontal: 12, paddingBottom: 16 }}>
+            <View style={homeStyles.newArrivalsContent}>
               <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={products}
                 keyExtractor={(it) => it.id + "new"}
-                ItemSeparatorComponent={() => <View style={{ width: 8 }} />}
+                ItemSeparatorComponent={() => (
+                  <View style={homeStyles.itemSpacing} />
+                )}
                 renderItem={({ item }) => (
                   <MiniProductCard
-                    source={require("../../assets/products/78edeebfee2c722175d103530b55162861f60fdb.png")}
-                    name={item.name}
-                    price={item.price}
-                    oldPrice={item.oldPrice}
+                    {...renderMiniProductCard({
+                      item,
+                      customSource: HOME_ASSETS.products.newArrival,
+                    })}
                   />
                 )}
               />
@@ -234,14 +223,11 @@ export default function HomeScreen() {
             title={SECTION_TITLES.newsFeatured.title}
             marginTop={24}
           />
-          <View style={{ paddingHorizontal: 12 }}>
-            <View style={{ gap: 16 }}>
+          <View style={homeStyles.featuredArticlesContainer}>
+            <View style={homeStyles.featuredArticlesList}>
               {featuredArticles.map((art, i) => (
                 <FeaturedArticleItem
-                  key={i}
-                  source={art.source}
-                  title={art.title}
-                  date={art.date}
+                  {...renderFeaturedArticle({ article: art, index: i })}
                 />
               ))}
             </View>

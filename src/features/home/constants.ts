@@ -46,6 +46,18 @@ export const FEATURED_ITEMS_LIMIT = 6;
 export const HOT_PRODUCTS_LIMIT = 8;
 export const NEW_ARRIVALS_LIMIT = 4;
 
+// Assets constants
+export const HOME_ASSETS = {
+  banners: {
+    subBanner: require("../../../assets/banners/111f441263cc356856a3d5519edba39600c39b2e.png"),
+    mainBanner1: require("../../../assets/banners/374b719df0c2fd9721df208e12a37f169addfc7e.png"),
+    mainBanner2: require("../../../assets/banners/111f441263cc356856a3d5519edba39600c39b2e.png"),
+  },
+  products: {
+    newArrival: require("../../../assets/products/78edeebfee2c722175d103530b55162861f60fdb.png"),
+  },
+};
+
 export const FEATURED_ARTICLES: FeaturedArticle[] = [
   {
     source: require("../../../assets/featured-articles/918905dd79f2a5e6d57814a5f396b5d13d0dbcb1.jpg"),

@@ -92,7 +92,19 @@ Mobile-App/
 │   │   └── brands.ts      # Brand data
 │   ├── features/          # Logic nghiệp vụ theo tính năng
 │   │   ├── home/          # Tính năng trang chủ
+│   │   │   ├── constants.ts    # Home constants (assets, limits)
+│   │   │   ├── helpers.ts      # Home helper functions
+│   │   │   ├── hooks.ts        # Home custom hooks
+│   │   │   ├── sectionTitles.ts # Home section titles
+│   │   │   ├── styles.ts       # Home styles
+│   │   │   └── types.ts        # Home TypeScript types
 │   │   ├── category/      # Tính năng danh mục
+│   │   │   ├── constants.ts    # Category constants (text, images)
+│   │   │   ├── helpers.ts      # Category helper functions
+│   │   │   ├── hooks.ts        # Category custom hooks
+│   │   │   ├── sectionTitles.ts # Category section titles
+│   │   │   ├── styles.ts       # Category styles
+│   │   │   └── types.ts        # Category TypeScript types
 │   │   └── news/          # Tính năng tin tức
 │   ├── hooks/             # Custom hooks
 │   │   └── useApi.ts      # API handling, pagination, search
@@ -131,20 +143,53 @@ Mobile-App/
 - **Axios** - HTTP client cho API calls
 - **React Native Gesture Handler** - Gesture handling
 
+## 🏗️ Kiến trúc dự án
+
+Dự án được tổ chức theo **Feature-based Architecture** với các nguyên tắc:
+
+### **Separation of Concerns**
+
+- **UI Components** (`src/components/`) - Chỉ focus vào rendering
+- **Business Logic** (`src/features/`) - Logic nghiệp vụ theo tính năng
+- **Data Layer** (`src/api/`, `src/store/`) - Xử lý data và state
+
+### **Feature-based Structure**
+
+Mỗi feature có cấu trúc riêng biệt:
+
+```
+src/features/[feature-name]/
+├── constants.ts      # Constants và configuration
+├── helpers.ts        # Helper functions và utilities
+├── hooks.ts          # Custom hooks cho logic
+├── sectionTitles.ts  # UI text và titles
+├── styles.ts         # StyleSheet definitions
+└── types.ts          # TypeScript interfaces
+```
+
+### **Code Quality Standards**
+
+- **Type Safety** - Strict TypeScript implementation
+- **Reusability** - Components và helpers có thể tái sử dụng
+- **Maintainability** - Code dễ maintain và extend
+- **Consistency** - Cùng pattern across features
+
 ## 📱 Màn hình chính
 
 ### HomeScreen
 
 - Banner carousel với khuyến mãi
-- Danh mục sản phẩm nhanh
-- Thương hiệu nổi bật
-- Sản phẩm hot và khuyến mãi
+- Danh mục sản phẩm nhanh (CategoryIconStrip)
+- Thương hiệu nổi bật (BrandCarousel)
+- Sản phẩm hot và khuyến mãi (FlashSale, HotProducts)
+- **Architecture**: Feature-based với styles, constants, helpers tách biệt
 
 ### CategoryScreen
 
-- Danh sách danh mục sản phẩm
-- Bộ lọc và sắp xếp
+- Danh sách danh mục sản phẩm với sidebar filter
+- Bộ lọc và sắp xếp theo category
 - Hiển thị sản phẩm theo danh mục
+- **Architecture**: Event handlers, TypeScript types, reusable components
 
 ### NewsScreen
 
@@ -196,11 +241,26 @@ expo publish
 
 ## 🤝 Đóng góp
 
+### Quy trình phát triển
+
 1. Fork dự án
 2. Tạo feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit thay đổi (`git commit -m 'Add some AmazingFeature'`)
-4. Push lên branch (`git push origin feature/AmazingFeature`)
-5. Mở Pull Request
+3. Tuân thủ architecture pattern:
+   - Tách styles vào `styles.ts`
+   - Tạo constants trong `constants.ts`
+   - Viết helpers trong `helpers.ts`
+   - Định nghĩa types trong `types.ts`
+4. Commit thay đổi (`git commit -m 'feat: add amazing feature'`)
+5. Push lên branch (`git push origin feature/AmazingFeature`)
+6. Mở Pull Request
+
+### Code Standards
+
+- **TypeScript**: Strict typing cho tất cả components
+- **Architecture**: Feature-based structure
+- **Styling**: StyleSheet thay vì inline styles
+- **Constants**: Centralized constants thay vì hardcoded values
+- **Helpers**: Reusable helper functions
 
 ## 📄 Giấy phép
 

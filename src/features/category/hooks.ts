@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { LEFT_RAIL_TITLES } from "./constants";
-import { makeItems } from "./helpers";
+import { makeItems, createCategoryEventHandlers } from "./helpers";
 
 export function useCategoryScreen() {
   const route = useRoute();
@@ -48,20 +48,7 @@ export function useCategoryScreen() {
     }
   };
 
-  const handleSearchChange = (text: string) => {
-    console.log("Search:", text);
-    // TODO: Implement search functionality
-  };
-
-  const handleCameraPress = () => {
-    console.log("Camera pressed");
-    // TODO: Implement camera functionality
-  };
-
-  const handleNotificationPress = () => {
-    console.log("Notification pressed");
-    // TODO: Implement notification functionality
-  };
+  const eventHandlers = createCategoryEventHandlers();
 
   return {
     // Data
@@ -77,8 +64,6 @@ export function useCategoryScreen() {
     // Handlers
     handleFilterPress,
     handleBackPress,
-    handleSearchChange,
-    handleCameraPress,
-    handleNotificationPress,
+    ...eventHandlers,
   } as const;
 }

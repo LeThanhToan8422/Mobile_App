@@ -35,6 +35,16 @@ export const CATEGORY_IMAGES = [
 ];
 
 // Product Images for category cards
+// Text constants
+export const CATEGORY_TEXT = {
+  subCategories: {
+    subCategory1: "Sub Category 1",
+    subCategory2: "Sub Category 2",
+  },
+  viewAll: "Xem tất cả",
+  backButton: "Quay lại",
+} as const;
+
 export const PRODUCT_IMAGES = [
   require("../../../assets/products/2d9309ff663a188d749cdf2ea61585fa60c1913a.png"),
   require("../../../assets/products/3efca5a09429cf058dbaf27f6f3f241f69d16190.png"),

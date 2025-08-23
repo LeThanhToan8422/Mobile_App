@@ -12,7 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import CategoryHeader from "@components/CategoryHeader";
 import CategoryCard from "@components/CategoryCard";
 import { useCategoryScreen } from "@features/category/hooks";
-import { CATEGORY_IMAGES } from "@features/category/constants";
+import { CATEGORY_IMAGES, CATEGORY_TEXT } from "@features/category/constants";
 import { renderCategoryCard } from "@features/category/helpers";
 import { categoryStyles } from "@features/category/styles";
 
@@ -28,6 +28,8 @@ export default function CategoryScreen() {
     handleSearchChange,
     handleCameraPress,
     handleNotificationPress,
+    handleViewAllSubCategory1,
+    handleViewAllSubCategory2,
   } = useCategoryScreen();
 
   return (
@@ -103,14 +105,16 @@ export default function CategoryScreen() {
             <View style={categoryStyles.subCategoryHeader}>
               <View style={categoryStyles.subCategoryTitleContainer}>
                 <Text style={categoryStyles.subCategoryTitleText}>
-                  Sub Category 1
+                  {CATEGORY_TEXT.subCategories.subCategory1}
                 </Text>
               </View>
 
               <TouchableOpacity
                 style={categoryStyles.viewAllButton}
-                onPress={() => console.log("Xem tất cả Sub Category 1")}>
-                <Text style={categoryStyles.viewAllText}>Xem tất cả</Text>
+                onPress={handleViewAllSubCategory1}>
+                <Text style={categoryStyles.viewAllText}>
+                  {CATEGORY_TEXT.viewAll}
+                </Text>
                 <Ionicons
                   name="chevron-forward"
                   size={16}
@@ -137,14 +141,16 @@ export default function CategoryScreen() {
             <View style={[categoryStyles.subCategoryHeader, { marginTop: 0 }]}>
               <View style={categoryStyles.subCategoryTitleContainer}>
                 <Text style={categoryStyles.subCategoryTitleText}>
-                  Sub Category 2
+                  {CATEGORY_TEXT.subCategories.subCategory2}
                 </Text>
               </View>
 
               <TouchableOpacity
                 style={categoryStyles.viewAllButton}
-                onPress={() => console.log("Xem tất cả Sub Category 2")}>
-                <Text style={categoryStyles.viewAllText}>Xem tất cả</Text>
+                onPress={handleViewAllSubCategory2}>
+                <Text style={categoryStyles.viewAllText}>
+                  {CATEGORY_TEXT.viewAll}
+                </Text>
                 <Ionicons
                   name="chevron-forward"
                   size={16}
