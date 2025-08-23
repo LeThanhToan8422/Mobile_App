@@ -1,14 +1,9 @@
 import React from "react";
-import { View, FlatList, Text, Pressable, StyleSheet } from "react-native";
+import { View, FlatList } from "react-native";
 import SectionHeader from "@components/SectionHeader";
-import { Colors } from "@theme/colors";
 import ProductCard from "@components/ProductCard";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  SCALE,
-  FLASH_ITEM_WIDTH,
-  SCREEN_WIDTH,
-} from "@features/home/constants";
+import { SCALE, FLASH_ITEM_WIDTH } from "@features/home/constants";
 import { useHomeScreen } from "@features/home/hooks";
 import { SECTION_TITLES, UI_TEXT } from "@features/home/sectionTitles";
 import HomeHeader from "@components/HomeHeader";
@@ -21,14 +16,12 @@ import CategoryIconStrip from "@components/CategoryIconStrip";
 import SubBanner from "@components/SubBanner";
 import QualityFilterCard from "@components/QualityFilterCard";
 import MiniProductCard from "@components/MiniProductCard";
-import { Ionicons } from "@expo/vector-icons";
 import FeaturedArticleItem from "@components/FeaturedArticleItem";
 
 export default function HomeScreen() {
   const {
     products,
-    brandLogos,
-    brandNames,
+    brandsForCarousel,
     keyExtractor,
     flashSaleProducts,
     hotProducts,
@@ -123,10 +116,7 @@ export default function HomeScreen() {
             title={SECTION_TITLES.featuredBrands.title}
           />
           <BrandCarousel
-            brands={brandNames.map((name, index) => ({
-              name,
-              source: brandLogos[index],
-            }))}
+            brands={brandsForCarousel}
             boxWidth={68}
             boxHeight={54}
             padding={4.53}

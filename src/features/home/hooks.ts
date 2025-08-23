@@ -1,10 +1,8 @@
 import React from "react";
 import { ImageSourcePropType } from "react-native";
-import {
-  products as PRODUCTS,
-  brandLogos as BRAND_LOGOS,
-  brandNames as BRAND_NAMES,
-} from "./constants";
+import { mockProducts } from "../../data/products";
+import { mockBrands } from "../../data/brands";
+import { convertToLegacyProducts } from "../../utils/helpers";
 
 export type FeaturedArticle = {
   source: ImageSourcePropType;
@@ -13,15 +11,30 @@ export type FeaturedArticle = {
 };
 
 export function useHomeScreen() {
-  const products = PRODUCTS;
-  const brandLogos = BRAND_LOGOS;
-  const brandNames = BRAND_NAMES;
+  const rawProducts = mockProducts;
+  const products = React.useMemo(
+    () => convertToLegacyProducts(rawProducts),
+    [rawProducts]
+  );
+  const brandLogos = mockBrands.map((brand) => brand.logo);
+  const brandNames = mockBrands.map((brand) => brand.name);
+  const brandsForCarousel = React.useMemo(
+    () =>
+      mockBrands.map((brand) => ({
+        name: brand.name,
+        source: brand.logo, // Use logo directly since it's already a require()
+      })),
+    []
+  );
 
   const keyExtractor = React.useCallback((it: { id: string }) => it.id, []);
 
   const flashSaleProducts = products;
   const hotProducts = products;
-  const recommendedProducts = React.useMemo(() => products.slice(0, 3), []);
+  const recommendedProducts = React.useMemo(
+    () => products.slice(0, 3),
+    [products]
+  );
 
   const featuredArticles: FeaturedArticle[] = React.useMemo(
     () => [
@@ -51,6 +64,7 @@ export function useHomeScreen() {
     products,
     brandLogos,
     brandNames,
+    brandsForCarousel,
     keyExtractor,
     flashSaleProducts,
     hotProducts,

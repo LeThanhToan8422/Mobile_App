@@ -78,15 +78,24 @@ Mobile-App/
 │   ├── products/          # Hình ảnh sản phẩm
 │   └── icons/             # Icons giao diện
 ├── src/
+│   ├── api/               # API configuration và HTTP client
+│   │   └── client.ts      # Axios client với interceptors
 │   ├── components/        # Components tái sử dụng
 │   │   ├── BannerCarousel.tsx
 │   │   ├── ProductCard.tsx
 │   │   ├── CategoryIconStrip.tsx
 │   │   └── ...
+│   ├── constants/         # Hằng số toàn cục
+│   │   └── index.ts       # API config, validation, messages
+│   ├── data/              # Mock data và helper functions
+│   │   ├── products.ts    # Product data
+│   │   └── brands.ts      # Brand data
 │   ├── features/          # Logic nghiệp vụ theo tính năng
 │   │   ├── home/          # Tính năng trang chủ
 │   │   ├── category/      # Tính năng danh mục
 │   │   └── news/          # Tính năng tin tức
+│   ├── hooks/             # Custom hooks
+│   │   └── useApi.ts      # API handling, pagination, search
 │   ├── navigation/        # Điều hướng ứng dụng
 │   │   └── RootNavigator.tsx
 │   ├── screens/           # Màn hình chính
@@ -95,8 +104,16 @@ Mobile-App/
 │   │   ├── NewsScreen.tsx
 │   │   ├── CartScreen.tsx
 │   │   └── AccountScreen.tsx
-│   └── theme/             # Giao diện và màu sắc
-│       └── colors.ts
+│   ├── services/          # Business logic services
+│   ├── store/             # State management (Zustand)
+│   │   └── productStore.ts # Product state management
+│   ├── theme/             # Giao diện và màu sắc
+│   │   └── colors.ts
+│   ├── types/             # TypeScript types và interfaces
+│   │   └── index.ts       # Global types
+│   ├── utils/             # Utility functions
+│   │   └── formatters.ts  # Data formatting utilities
+│   └── index.ts           # Main export file
 ├── App.tsx                # Component gốc
 ├── package.json           # Dependencies và scripts
 └── app.json              # Cấu hình Expo
@@ -110,6 +127,9 @@ Mobile-App/
 - **React Navigation 7.x** - Thư viện điều hướng
 - **React Native Reanimated** - Animation library
 - **Expo Vector Icons** - Icon library
+- **Zustand** - State management library
+- **Axios** - HTTP client cho API calls
+- **React Native Gesture Handler** - Gesture handling
 
 ## 📱 Màn hình chính
 

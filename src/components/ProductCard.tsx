@@ -19,8 +19,8 @@ type Props = {
   image?: string;
   source?: ImageSourcePropType;
   name: string;
-  price: string;
-  oldPrice?: string;
+  price: string | number;
+  oldPrice?: string | number;
   soldText?: string;
   progress?: number; // 0..1
   width?: number;

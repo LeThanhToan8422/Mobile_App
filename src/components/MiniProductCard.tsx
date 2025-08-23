@@ -14,8 +14,8 @@ type Props = {
   image?: string;
   source?: ImageSourcePropType;
   name: string;
-  price: string;
-  oldPrice?: string;
+  price: string | number;
+  oldPrice?: string | number;
 };
 
 export default function MiniProductCard({
