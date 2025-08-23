@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import { Colors } from "../theme/colors";
 
@@ -60,6 +61,10 @@ const ITEMS = [
 type StripItem = { name?: string; source?: any; placeholder?: boolean };
 type Page = { key: string; items: StripItem[] };
 
+interface CategoryIconStripProps {
+  onCategoryPress?: (categoryName: string, index: number) => void;
+}
+
 function paginate(items: StripItem[], perPage: number): StripItem[][] {
   const res: StripItem[][] = [];
   for (let i = 0; i < items.length; i += perPage) {
@@ -73,7 +78,9 @@ function paginate(items: StripItem[], perPage: number): StripItem[][] {
   return res;
 }
 
-export default function CategoryIconStrip() {
+export default function CategoryIconStrip({
+  onCategoryPress,
+}: CategoryIconStripProps) {
   const realPages = React.useMemo(
     () =>
       paginate(ITEMS, PER_PAGE).map((arr, i) => ({ key: `p${i}`, items: arr })),
@@ -137,7 +144,7 @@ export default function CategoryIconStrip() {
                 justifyContent: "space-between",
               }}>
               {item.items.map((it, i) => (
-                <View
+                <TouchableOpacity
                   key={i}
                   style={[
                     styles.card,
@@ -146,7 +153,13 @@ export default function CategoryIconStrip() {
                       height: ITEM_H,
                       opacity: it.placeholder ? 0 : 1,
                     },
-                  ]}>
+                  ]}
+                  onPress={() => {
+                    if (!it.placeholder && it.name && onCategoryPress) {
+                      onCategoryPress(it.name, i);
+                    }
+                  }}
+                  disabled={it.placeholder}>
                   {!it.placeholder && (
                     <>
                       <Image
@@ -164,7 +177,7 @@ export default function CategoryIconStrip() {
                       </Text>
                     </>
                   )}
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
           </View>

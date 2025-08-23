@@ -1,15 +1,47 @@
 import React from "react";
-import { View, TextInput, StyleSheet, Platform, Text } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Platform,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../theme/colors";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function HomeHeader() {
+interface CategoryHeaderProps {
+  onBackPress?: () => void;
+  onSearchChange?: (text: string) => void;
+  onCameraPress?: () => void;
+  onNotificationPress?: () => void;
+}
+
+export default function CategoryHeader({
+  onBackPress,
+  onSearchChange,
+  onCameraPress,
+  onNotificationPress,
+}: CategoryHeaderProps) {
   const insets = useSafeAreaInsets();
+
   return (
     <View style={{ backgroundColor: Colors.primary }}>
+      {/* Status Bar Spacer */}
       <View style={[styles.spacer, { height: Math.max(insets.top, 24) }]} />
+
+      {/* Header Content */}
       <View style={styles.container}>
+        {/* Back Button */}
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={onBackPress}
+          activeOpacity={0.8}>
+          <Ionicons name="chevron-back" size={24} color="#fff" />
+        </TouchableOpacity>
+
+        {/* Search Bar */}
         <View style={styles.searchWrap}>
           <Ionicons
             name="search"
@@ -21,18 +53,27 @@ export default function HomeHeader() {
             placeholder="Tìm kiếm sản phẩm"
             placeholderTextColor={Colors.muted}
             style={styles.input}
+            onChangeText={onSearchChange}
           />
-          <View style={styles.cameraButton}>
+          <TouchableOpacity
+            style={styles.cameraButton}
+            onPress={onCameraPress}
+            activeOpacity={0.8}>
             <Ionicons name="camera-outline" color={Colors.muted} size={18} />
-          </View>
+          </TouchableOpacity>
         </View>
+
+        {/* Notification Button */}
         <View style={styles.actions}>
-          <View style={{ position: "relative" }}>
+          <TouchableOpacity
+            style={{ position: "relative" }}
+            onPress={onNotificationPress}
+            activeOpacity={0.8}>
             <Ionicons name="notifications-outline" size={22} color="#fff" />
             <View style={styles.badge}>
               <Text style={styles.badgeTxt}>1</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -40,7 +81,9 @@ export default function HomeHeader() {
 }
 
 const styles = StyleSheet.create({
-  spacer: { backgroundColor: Colors.primary },
+  spacer: {
+    backgroundColor: Colors.primary,
+  },
   container: {
     backgroundColor: Colors.primary,
     paddingHorizontal: 12,
@@ -49,6 +92,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  backButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "rgba(255,255,255,0.2)",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 12,
   },
   searchWrap: {
     flex: 1,
@@ -70,9 +122,13 @@ const styles = StyleSheet.create({
     height: 30,
     alignItems: "center",
     justifyContent: "center",
-    marginHorizontal: 8,
+    marginRight: 8,
   },
-  actions: { flexDirection: "row", alignItems: "center", marginLeft: 12 },
+  actions: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 12,
+  },
   badge: {
     position: "absolute",
     top: -4,
@@ -84,5 +140,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  badgeTxt: { color: "#fff", fontSize: 9, fontWeight: "900" },
+  badgeTxt: {
+    color: "#fff",
+    fontSize: 9,
+    fontWeight: "900",
+  },
 });

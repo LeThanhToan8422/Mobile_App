@@ -1,11 +1,84 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import { LEFT_RAIL_TITLES } from "./constants";
 import { makeItems } from "./helpers";
 
 export function useCategoryScreen() {
+  const route = useRoute();
+  const navigation = useNavigation();
   const leftTitles = LEFT_RAIL_TITLES;
   const leftActiveIndex = 1; // mock active
-  const section1 = useMemo(() => makeItems("s1", 6), []);
-  const section2 = useMemo(() => makeItems("s2", 6), []);
-  return { leftTitles, leftActiveIndex, section1, section2 } as const;
+
+  // Lấy params từ navigation (nếu có)
+  const params = route.params as any;
+  const initialFilter = params?.selectedFilter || leftTitles[leftActiveIndex];
+  const initialIndex =
+    params?.filterIndex !== undefined ? params.filterIndex : leftActiveIndex;
+
+  // State để theo dõi bộ lọc đang được chọn
+  const [selectedFilter, setSelectedFilter] = useState(initialFilter);
+  const [activeFilterIndex, setActiveFilterIndex] =
+    useState<number>(initialIndex);
+
+  // Cập nhật state khi params thay đổi
+  useEffect(() => {
+    if (params?.selectedFilter && params?.filterIndex !== undefined) {
+      setSelectedFilter(params.selectedFilter);
+      setActiveFilterIndex(params.filterIndex);
+    }
+  }, [params]);
+
+  // Mock data
+  const section1 = useMemo(() => makeItems("s1", 9), []);
+  const section2 = useMemo(() => makeItems("s2", 9), []);
+
+  // Handler functions
+  const handleFilterPress = (filterName: string, index: number) => {
+    setSelectedFilter(filterName);
+    setActiveFilterIndex(index);
+  };
+
+  const handleBackPress = () => {
+    // Navigate back to previous screen
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      // Fallback: Navigate to Home if can't go back
+      (navigation as any).navigate("Home");
+    }
+  };
+
+  const handleSearchChange = (text: string) => {
+    console.log("Search:", text);
+    // TODO: Implement search functionality
+  };
+
+  const handleCameraPress = () => {
+    console.log("Camera pressed");
+    // TODO: Implement camera functionality
+  };
+
+  const handleNotificationPress = () => {
+    console.log("Notification pressed");
+    // TODO: Implement notification functionality
+  };
+
+  return {
+    // Data
+    leftTitles,
+    leftActiveIndex,
+    section1,
+    section2,
+
+    // State
+    selectedFilter,
+    activeFilterIndex,
+
+    // Handlers
+    handleFilterPress,
+    handleBackPress,
+    handleSearchChange,
+    handleCameraPress,
+    handleNotificationPress,
+  } as const;
 }

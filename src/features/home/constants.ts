@@ -1,7 +1,8 @@
 // Home screen constants and configuration
 // Data has been moved to src/data/ directory
 
-import { Dimensions } from "react-native";
+import { Dimensions, ImageSourcePropType } from "react-native";
+import { FeaturedArticle } from "./types";
 
 export const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
@@ -44,3 +45,21 @@ export const BRAND_SPACING = 16;
 export const FEATURED_ITEMS_LIMIT = 6;
 export const HOT_PRODUCTS_LIMIT = 8;
 export const NEW_ARRIVALS_LIMIT = 4;
+
+export const FEATURED_ARTICLES: FeaturedArticle[] = [
+  {
+    source: require("../../../assets/featured-articles/918905dd79f2a5e6d57814a5f396b5d13d0dbcb1.jpg"),
+    title: "Đầu phun sprinkler là gì? Cấu tạo, ứng dụng và nguyên lý hoạt động",
+    date: "13/02/2025",
+  },
+  {
+    source: require("../../../assets/featured-articles/0cd21eee2e2af2e98c3671d24fdf222a7a44a1c9.jpg"),
+    title: "Đầu phun sprinkler là gì? Cấu tạo, ứng dụng và nguyên lý hoạt động",
+    date: "13/02/2025",
+  },
+  {
+    source: require("../../../assets/featured-articles/3b16a3c6c59a956b498e1040eaa556d3f77ec72e.jpg"),
+    title: "Đầu phun sprinkler là gì? Cấu tạo, ứng dụng và nguyên lý hoạt động",
+    date: "13/02/2025",
+  },
+];

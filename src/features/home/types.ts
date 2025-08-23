@@ -7,4 +7,9 @@ export type Product = {
   oldPrice?: string;
   source: ImageSourcePropType;
 };
- 
+
+export type FeaturedArticle = {
+  source: ImageSourcePropType;
+  title: string;
+  date: string;
+};

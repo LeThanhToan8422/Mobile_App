@@ -1,5 +1,6 @@
 import React from "react";
 import { View, FlatList } from "react-native";
+
 import SectionHeader from "@components/SectionHeader";
 import ProductCard from "@components/ProductCard";
 import { LinearGradient } from "expo-linear-gradient";
@@ -27,6 +28,7 @@ export default function HomeScreen() {
     hotProducts,
     recommendedProducts,
     featuredArticles,
+    handleCategoryPress,
   } = useHomeScreen();
 
   return (
@@ -56,7 +58,7 @@ export default function HomeScreen() {
             marginTop={12}
             marginBottom={8}
           />
-          <CategoryIconStrip />
+          <CategoryIconStrip onCategoryPress={handleCategoryPress} />
 
           {/* Banner lớn (slide - mua 10 tặng 2) */}
           <View
