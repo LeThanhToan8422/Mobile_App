@@ -26,6 +26,11 @@ export const styles = StyleSheet.create({
     color: Colors.text,
     paddingRight: 12,
     fontSize: 14,
+    justifyContent: "center",
+  },
+  searchPlaceholder: {
+    color: "#8E8E93",
+    fontSize: 14,
   },
   cameraButton: {
     width: 30,

@@ -1,14 +1,18 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Alert } from "react-native";
 import { LEFT_RAIL_TITLES } from "@features/category/constants";
 import { FEATURED_ARTICLES } from "./constants";
 import { mockProducts } from "../../data/products";
 import { mockBrands } from "../../data/brands";
 import { convertToLegacyProducts } from "../../utils/helpers";
 import { FeaturedArticle } from "./types";
+import { useCartStore } from "../../store/cartStore";
+import { formatCartItemForAdd } from "../cart";
 
 export function useHomeScreen() {
   const navigation = useNavigation();
+  const { addToCart } = useCartStore();
 
   const rawProducts = mockProducts;
   const products = React.useMemo(
@@ -54,6 +58,17 @@ export function useHomeScreen() {
     });
   };
 
+  // Add to cart handler
+  const handleBuyNow = (item: any) => {
+    const cartItem = formatCartItemForAdd(item);
+    addToCart(cartItem);
+
+    // Show success message
+    Alert.alert("Thành công!", `Đã thêm "${item.name}" vào giỏ hàng`, [
+      { text: "OK" },
+    ]);
+  };
+
   return {
     products,
     brandLogos,
@@ -65,5 +80,6 @@ export function useHomeScreen() {
     recommendedProducts,
     featuredArticles,
     handleCategoryPress,
+    handleBuyNow,
   } as const;
 }

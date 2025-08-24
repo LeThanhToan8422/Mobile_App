@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable, TouchableOpacity } from "react-native";
 import { MiniProductCardProps } from "./MiniProductCard.types";
 import { styles } from "./MiniProductCard.styles";
 
@@ -9,9 +9,11 @@ export default function MiniProductCard({
   name,
   price,
   oldPrice,
+  onBuyNowPress,
+  onPress,
 }: MiniProductCardProps) {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.9}>
       {/* Image block */}
       <View style={styles.imageWrap}>
         {source ? (
@@ -34,10 +36,10 @@ export default function MiniProductCard({
           {!!oldPrice && <Text style={styles.oldPrice}>{oldPrice}</Text>}
           {!!oldPrice && <Text style={styles.discount}>-10%</Text>}
         </View>
-        <View style={styles.buyBtn}>
+        <Pressable style={styles.buyBtn} onPress={onBuyNowPress}>
           <Text style={styles.buyText}>Mua ngay</Text>
-        </View>
+        </Pressable>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

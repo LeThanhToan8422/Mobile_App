@@ -12,6 +12,8 @@ export type ProductCardProps = {
   width?: number;
   variant?: "default" | "flashSale";
   badgeText?: string;
+  onBuyNowPress?: () => void;
+  onPress?: () => void;
 };
 
 export type ProductCardStyles = {

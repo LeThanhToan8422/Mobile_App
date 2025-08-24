@@ -3,6 +3,7 @@ import { View, TextInput, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../theme/colors";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 import { CategoryHeaderProps } from "./CategoryHeader.types";
 import { styles } from "./CategoryHeader.styles";
 
@@ -13,6 +14,11 @@ export default function CategoryHeader({
   onNotificationPress,
 }: CategoryHeaderProps) {
   const insets = useSafeAreaInsets();
+  const navigation = useNavigation();
+
+  const handleSearchPress = () => {
+    (navigation as any).navigate("Search");
+  };
 
   return (
     <View style={{ backgroundColor: Colors.primary }}>
@@ -30,26 +36,24 @@ export default function CategoryHeader({
         </TouchableOpacity>
 
         {/* Search Bar */}
-        <View style={styles.searchWrap}>
+        <TouchableOpacity
+          style={styles.searchWrap}
+          onPress={handleSearchPress}
+          activeOpacity={0.8}>
           <Ionicons
             name="search"
             color={Colors.muted}
             size={18}
             style={{ marginHorizontal: 8 }}
           />
-          <TextInput
-            placeholder="Tìm kiếm sản phẩm"
-            placeholderTextColor={Colors.muted}
-            style={styles.input}
-            onChangeText={onSearchChange}
-          />
+          <Text style={styles.searchPlaceholder}>Tìm kiếm sản phẩm</Text>
           <TouchableOpacity
             style={styles.cameraButton}
             onPress={onCameraPress}
             activeOpacity={0.8}>
             <Ionicons name="camera-outline" color={Colors.muted} size={18} />
           </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
 
         {/* Notification Button */}
         <View style={styles.actions}>

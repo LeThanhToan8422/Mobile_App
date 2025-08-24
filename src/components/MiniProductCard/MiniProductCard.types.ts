@@ -6,4 +6,6 @@ export type MiniProductCardProps = {
   name: string;
   price: string | number;
   oldPrice?: string | number;
+  onBuyNowPress?: () => void;
+  onPress?: () => void;
 };

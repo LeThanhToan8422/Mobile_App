@@ -1,5 +1,6 @@
 import React from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import SectionHeader from "@components/SectionHeader";
 import ProductCard from "@components/ProductCard";
@@ -13,6 +14,7 @@ import {
   renderMiniProductCard,
   renderFeaturedArticle,
 } from "@features/home/helpers";
+
 import HomeHeader from "@components/HomeHeader";
 import Countdown from "@components/Countdown";
 
@@ -26,6 +28,7 @@ import MiniProductCard from "@components/MiniProductCard";
 import FeaturedArticleItem from "@components/FeaturedArticleItem";
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   const {
     products,
     brandsForCarousel,
@@ -35,6 +38,7 @@ export default function HomeScreen() {
     recommendedProducts,
     featuredArticles,
     handleCategoryPress,
+    handleBuyNow,
   } = useHomeScreen();
 
   return (
@@ -107,6 +111,11 @@ export default function HomeScreen() {
                     variant: "flashSale",
                     progress: 0.7,
                     soldText: UI_TEXT.productInfo.soldText,
+                    onBuyNowPress: () => handleBuyNow(item),
+                    onPress: () =>
+                      (navigation as any).navigate("ProductDetail", {
+                        productId: item.id,
+                      }),
                   })}
                 />
               )}
@@ -151,6 +160,11 @@ export default function HomeScreen() {
                     index,
                     variant: "flashSale",
                     badgeText: UI_TEXT.productInfo.onlyOneLeft,
+                    onBuyNowPress: () => handleBuyNow(item),
+                    onPress: () =>
+                      (navigation as any).navigate("ProductDetail", {
+                        productId: item.id,
+                      }),
                   })}
                 />
               </View>
@@ -181,7 +195,16 @@ export default function HomeScreen() {
                       <View style={homeStyles.itemSpacing} />
                     )}
                     renderItem={({ item }) => (
-                      <MiniProductCard {...renderMiniProductCard({ item })} />
+                      <MiniProductCard
+                        {...renderMiniProductCard({
+                          item,
+                          onPress: () =>
+                            (navigation as any).navigate("ProductDetail", {
+                              productId: item.id,
+                            }),
+                        })}
+                        onBuyNowPress={() => handleBuyNow(item)}
+                      />
                     )}
                   />
                 </View>
@@ -210,7 +233,12 @@ export default function HomeScreen() {
                     {...renderMiniProductCard({
                       item,
                       customSource: HOME_ASSETS.products.newArrival,
+                      onPress: () =>
+                        (navigation as any).navigate("ProductDetail", {
+                          productId: item.id,
+                        }),
                     })}
+                    onBuyNowPress={() => handleBuyNow(item)}
                   />
                 )}
               />

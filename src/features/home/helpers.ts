@@ -7,6 +7,8 @@ export function renderProductCard({
   progress,
   soldText,
   badgeText,
+  onBuyNowPress,
+  onPress,
   ...props
 }: {
   item: any;
@@ -15,6 +17,8 @@ export function renderProductCard({
   progress?: number;
   soldText?: string;
   badgeText?: string;
+  onBuyNowPress?: () => void;
+  onPress?: () => void;
   [key: string]: any;
 }) {
   return {
@@ -28,6 +32,8 @@ export function renderProductCard({
     progress,
     soldText,
     badgeText,
+    onBuyNowPress,
+    onPress,
     ...props,
   };
 }
@@ -35,15 +41,18 @@ export function renderProductCard({
 export function renderMiniProductCard({
   item,
   customSource,
+  onPress,
 }: {
   item: any;
   customSource?: any;
+  onPress?: () => void;
 }) {
   return {
     source: customSource || item.source,
     name: item.name,
     price: item.price,
     oldPrice: item.oldPrice,
+    onPress,
   };
 }
 

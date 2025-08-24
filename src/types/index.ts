@@ -212,11 +212,11 @@ export type RootStackParamList = {
 };
 
 export type TabParamList = {
-  HomeTab: undefined;
-  CategoryTab: undefined;
-  NewsTab: undefined;
-  CartTab: undefined;
-  AccountTab: undefined;
+  Home: undefined;
+  Category: undefined;
+  Cart: undefined;
+  News: undefined;
+  Account: undefined;
 };
 
 // Theme types

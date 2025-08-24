@@ -38,6 +38,13 @@ export const styles = StyleSheet.create({
     paddingRight: 12,
     fontSize: 14,
   },
+
+  searchPlaceholder: {
+    flex: 1,
+    color: Colors.muted,
+    paddingRight: 12,
+    fontSize: 14,
+  },
   cameraButton: {
     width: 30,
     height: 30,
