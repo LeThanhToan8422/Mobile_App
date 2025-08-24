@@ -49,13 +49,11 @@ export function renderMiniProductCard({
 
 export function renderFeaturedArticle({
   article,
-  index,
 }: {
   article: any;
   index: number;
 }) {
   return {
-    key: index,
     source: article.source,
     title: article.title,
     date: article.date,

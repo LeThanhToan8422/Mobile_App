@@ -227,6 +227,7 @@ export default function HomeScreen() {
             <View style={homeStyles.featuredArticlesList}>
               {featuredArticles.map((art, i) => (
                 <FeaturedArticleItem
+                  key={i}
                   {...renderFeaturedArticle({ article: art, index: i })}
                 />
               ))}

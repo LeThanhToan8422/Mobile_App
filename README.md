@@ -1,116 +1,131 @@
 # 📱 Mobile App
 
-Ứng dụng di động được xây dựng bằng React Native và Expo, cung cấp trải nghiệm mua sắm trực tuyến với giao diện người dùng hiện đại và thân thiện.
+A mobile application built with React Native and Expo, providing an online shopping experience with modern and user-friendly interface.
 
-## ✨ Tính năng chính
+## ✨ Key Features
 
-- 🏠 **Trang chủ**: Hiển thị banner, danh mục sản phẩm, thương hiệu nổi bật
-- 🛍️ **Danh mục**: Duyệt và tìm kiếm sản phẩm theo danh mục
-- 📰 **Tin tức**: Cập nhật tin tức và bài viết mới nhất
-- 🛒 **Giỏ hàng**: Quản lý sản phẩm đã chọn
-- 👤 **Tài khoản**: Quản lý thông tin cá nhân và đơn hàng
-- 🎯 **Khuyến mãi**: Flash sale và ưu đãi đặc biệt
-- 🔍 **Tìm kiếm**: Tìm kiếm sản phẩm nhanh chóng
+- 🏠 **Home**: Display banners, product categories, featured brands
+- 🛍️ **Categories**: Browse and search products by category
+- 📰 **News**: Latest news and articles updates
+- 🛒 **Cart**: Manage selected products
+- 👤 **Account**: Manage personal information and orders
+- 🎯 **Promotions**: Flash sales and special offers
+- 🔍 **Search**: Quick product search
 
-## 🚀 Cài đặt
+## 🚀 Installation
 
-### Yêu cầu hệ thống
+### System Requirements
 
-- Node.js (phiên bản 18 trở lên)
-- npm hoặc yarn
+- Node.js (version 18 or higher)
+- npm or yarn
 - Expo CLI
-- Android Studio (để chạy trên Android)
-- Xcode (để chạy trên iOS - chỉ macOS)
+- Android Studio (for Android development)
+- Xcode (for iOS development - macOS only)
 
-### Cài đặt dependencies
+### Install Dependencies
 
 ```bash
 # Clone repository
 git clone <repository-url>
 cd Mobile-App
 
-# Cài đặt dependencies
+# Install dependencies
 npm install
-# hoặc
+# or
 yarn install
 
-# Cài đặt Expo CLI (nếu chưa có)
+# Install Expo CLI (if not already installed)
 npm install -g @expo/cli
 ```
 
-## 🏃‍♂️ Chạy ứng dụng
+## 🏃‍♂️ Running the App
 
-### Khởi động development server
+### Start Development Server
 
 ```bash
-# Khởi động Expo development server
+# Start Expo development server
 npm start
-# hoặc
+# or
 expo start
 ```
 
-### Chạy trên thiết bị
+### Run on Device
 
 ```bash
-# Chạy trên Android
+# Run on Android
 npm run android
-# hoặc
+# or
 expo start --android
 
-# Chạy trên iOS
+# Run on iOS
 npm run ios
-# hoặc
+# or
 expo start --ios
 
-# Chạy trên web
+# Run on web
 npm run web
-# hoặc
+# or
 expo start --web
 ```
 
-## 📱 Cấu trúc dự án
+## 📱 Project Structure
 
 ```
 Mobile-App/
-├── assets/                 # Tài nguyên tĩnh (hình ảnh, icons)
-│   ├── banners/           # Banner quảng cáo
-│   ├── brands/            # Logo thương hiệu
-│   ├── products/          # Hình ảnh sản phẩm
-│   └── icons/             # Icons giao diện
+├── assets/                 # Static resources (images, icons)
+│   ├── banners/           # Advertisement banners
+│   ├── brands/            # Brand logos
+│   ├── products/          # Product images
+│   └── icons/             # Interface icons
 ├── src/
-│   ├── api/               # API configuration và HTTP client
-│   │   └── client.ts      # Axios client với interceptors
-│   ├── components/        # Components tái sử dụng
-│   │   ├── BannerCarousel.tsx
-│   │   ├── ProductCard.tsx
-│   │   ├── CategoryIconStrip.tsx
-│   │   └── ...
-│   ├── constants/         # Hằng số toàn cục
+│   ├── api/               # API configuration and HTTP client
+│   │   └── client.ts      # Axios client with interceptors
+│   ├── components/        # Reusable components
+│   │   ├── ProductCard/          # Product card component
+│   │   ├── BannerCarousel/       # Banner carousel component
+│   │   ├── HomeHeader/           # Home header component
+│   │   ├── BadgePill/            # Badge pill component
+│   │   ├── ProgressBar/           # Progress bar component
+│   │   ├── SectionHeader/         # Section header component
+│   │   ├── MiniProductCard/       # Mini product card component
+│   │   ├── FeaturedArticleItem/   # Featured article component
+│   │   ├── Countdown/             # Countdown component
+│   │   ├── CategoryShortcuts/     # Category shortcuts component
+│   │   ├── SubBanner/             # Sub banner component
+│   │   ├── PromoGrid/             # Promo grid component
+│   │   ├── QualityFilterCard/     # Quality filter card component
+│   │   ├── CategoryIconStrip/     # Category icon strip component
+│   │   ├── CategorySection/       # Category section component
+│   │   ├── CategoryCard/          # Category card component
+│   │   ├── CategoryHeader/        # Category header component
+│   │   ├── BrandCarousel/         # Brand carousel component
+│   │   └── BrandTile/             # Brand tile component
+│   ├── constants/         # Global constants
 │   │   └── index.ts       # API config, validation, messages
-│   ├── data/              # Mock data và helper functions
+│   ├── data/              # Mock data and helper functions
 │   │   ├── products.ts    # Product data
 │   │   └── brands.ts      # Brand data
-│   ├── features/          # Logic nghiệp vụ theo tính năng
-│   │   ├── home/          # Tính năng trang chủ
+│   ├── features/          # Business logic by feature
+│   │   ├── home/          # Home feature
 │   │   │   ├── constants.ts    # Home constants (assets, limits)
 │   │   │   ├── helpers.ts      # Home helper functions
 │   │   │   ├── hooks.ts        # Home custom hooks
 │   │   │   ├── sectionTitles.ts # Home section titles
 │   │   │   ├── styles.ts       # Home styles
 │   │   │   └── types.ts        # Home TypeScript types
-│   │   ├── category/      # Tính năng danh mục
+│   │   ├── category/      # Category feature
 │   │   │   ├── constants.ts    # Category constants (text, images)
 │   │   │   ├── helpers.ts      # Category helper functions
 │   │   │   ├── hooks.ts        # Category custom hooks
 │   │   │   ├── sectionTitles.ts # Category section titles
 │   │   │   ├── styles.ts       # Category styles
 │   │   │   └── types.ts        # Category TypeScript types
-│   │   └── news/          # Tính năng tin tức
+│   │   └── news/          # News feature
 │   ├── hooks/             # Custom hooks
 │   │   └── useApi.ts      # API handling, pagination, search
-│   ├── navigation/        # Điều hướng ứng dụng
+│   ├── navigation/        # App navigation
 │   │   └── RootNavigator.tsx
-│   ├── screens/           # Màn hình chính
+│   ├── screens/           # Main screens
 │   │   ├── HomeScreen.tsx
 │   │   ├── CategoryScreen.tsx
 │   │   ├── NewsScreen.tsx
@@ -119,50 +134,50 @@ Mobile-App/
 │   ├── services/          # Business logic services
 │   ├── store/             # State management (Zustand)
 │   │   └── productStore.ts # Product state management
-│   ├── theme/             # Giao diện và màu sắc
+│   ├── theme/             # UI and colors
 │   │   └── colors.ts
-│   ├── types/             # TypeScript types và interfaces
+│   ├── types/             # TypeScript types and interfaces
 │   │   └── index.ts       # Global types
 │   ├── utils/             # Utility functions
 │   │   └── formatters.ts  # Data formatting utilities
 │   └── index.ts           # Main export file
-├── App.tsx                # Component gốc
-├── package.json           # Dependencies và scripts
-└── app.json              # Cấu hình Expo
+├── App.tsx                # Root component
+├── package.json           # Dependencies and scripts
+└── app.json              # Expo configuration
 ```
 
-## 🛠️ Công nghệ sử dụng
+## 🛠️ Technologies Used
 
-- **React Native 0.79.5** - Framework phát triển ứng dụng di động
-- **Expo 53.0.20** - Platform và tools để phát triển React Native
-- **TypeScript 5.8.3** - Ngôn ngữ lập trình với type safety
-- **React Navigation 7.x** - Thư viện điều hướng
+- **React Native 0.79.5** - Mobile app development framework
+- **Expo 53.0.20** - Platform and tools for React Native development
+- **TypeScript 5.8.3** - Programming language with type safety
+- **React Navigation 7.x** - Navigation library
 - **React Native Reanimated** - Animation library
 - **Expo Vector Icons** - Icon library
 - **Zustand** - State management library
-- **Axios** - HTTP client cho API calls
+- **Axios** - HTTP client for API calls
 - **React Native Gesture Handler** - Gesture handling
 
-## 🏗️ Kiến trúc dự án
+## 🏗️ Project Architecture
 
-Dự án được tổ chức theo **Feature-based Architecture** với các nguyên tắc:
+The project is organized using **Feature-based Architecture** with the following principles:
 
 ### **Separation of Concerns**
 
-- **UI Components** (`src/components/`) - Chỉ focus vào rendering
-- **Business Logic** (`src/features/`) - Logic nghiệp vụ theo tính năng
-- **Data Layer** (`src/api/`, `src/store/`) - Xử lý data và state
+- **UI Components** (`src/components/`) - Focus only on rendering
+- **Business Logic** (`src/features/`) - Business logic by feature
+- **Data Layer** (`src/api/`, `src/store/`) - Data and state handling
 
 ### **Feature-based Structure**
 
-Mỗi feature có cấu trúc riêng biệt:
+Each feature has its own structure:
 
 ```
 src/features/[feature-name]/
-├── constants.ts      # Constants và configuration
-├── helpers.ts        # Helper functions và utilities
-├── hooks.ts          # Custom hooks cho logic
-├── sectionTitles.ts  # UI text và titles
+├── constants.ts      # Constants and configuration
+├── helpers.ts        # Helper functions and utilities
+├── hooks.ts          # Custom hooks for logic
+├── sectionTitles.ts  # UI text and titles
 ├── styles.ts         # StyleSheet definitions
 └── types.ts          # TypeScript interfaces
 ```
@@ -170,108 +185,102 @@ src/features/[feature-name]/
 ### **Code Quality Standards**
 
 - **Type Safety** - Strict TypeScript implementation
-- **Reusability** - Components và helpers có thể tái sử dụng
-- **Maintainability** - Code dễ maintain và extend
-- **Consistency** - Cùng pattern across features
+- **Reusability** - Components and helpers are reusable
+- **Maintainability** - Code is easy to maintain and extend
+- **Consistency** - Same pattern across features
 
-## 📱 Màn hình chính
+## 📱 Main Screens
 
 ### HomeScreen
 
-- Banner carousel với khuyến mãi
-- Danh mục sản phẩm nhanh (CategoryIconStrip)
-- Thương hiệu nổi bật (BrandCarousel)
-- Sản phẩm hot và khuyến mãi (FlashSale, HotProducts)
-- **Architecture**: Feature-based với styles, constants, helpers tách biệt
+- Banner carousel with promotions
+- Quick product categories (CategoryIconStrip)
+- Featured brands (BrandCarousel)
+- Hot products and promotions (FlashSale, HotProducts)
 
 ### CategoryScreen
 
-- Danh sách danh mục sản phẩm với sidebar filter
-- Bộ lọc và sắp xếp theo category
-- Hiển thị sản phẩm theo danh mục
-- **Architecture**: Event handlers, TypeScript types, reusable components
+- Product category list with sidebar filter
+- Filter and sort by category
+- Display products by category
 
 ### NewsScreen
 
-- Tin tức và bài viết mới nhất
-- Danh mục tin tức
-- Tìm kiếm bài viết
+- Latest news and articles
+- News categories
+- Article search
 
 ### CartScreen
 
-- Giỏ hàng sản phẩm
-- Tính tổng tiền
-- Xử lý đơn hàng
+- Shopping cart products
+- Calculate total price
+- Process orders
 
 ### AccountScreen
 
-- Thông tin tài khoản
-- Lịch sử đơn hàng
-- Cài đặt ứng dụng
+- Account information
+- Order history
+- App settings
 
-## 🎨 Giao diện
+## 🎨 User Interface
 
-Ứng dụng sử dụng thiết kế Material Design với:
+The app uses Material Design with:
 
-- Màu sắc chủ đạo: #025FD5 (xanh dương)
-- Giao diện sáng với nền #F2F5F8
-- Icons và hình ảnh chất lượng cao
-- Responsive design cho nhiều kích thước màn hình
+- Primary color: #025FD5 (blue)
+- Light interface with #F2F5F8 background
+- High-quality icons and images
+- Responsive design for multiple screen sizes
 
-## 📦 Build và Deploy
+## 📦 Build and Deploy
 
-### Build cho production
+### Build for Production
 
 ```bash
-# Build cho Android
+# Build for Android
 expo build:android
 
-# Build cho iOS
+# Build for iOS
 expo build:ios
 
-# Build cho web
+# Build for web
 expo build:web
 ```
 
-### Publish lên Expo
+### Publish to Expo
 
 ```bash
 expo publish
 ```
 
-## 🤝 Đóng góp
+## 🤝 Contributing
 
-### Quy trình phát triển
+### Development Process
 
-1. Fork dự án
-2. Tạo feature branch (`git checkout -b feature/AmazingFeature`)
-3. Tuân thủ architecture pattern:
-   - Tách styles vào `styles.ts`
-   - Tạo constants trong `constants.ts`
-   - Viết helpers trong `helpers.ts`
-   - Định nghĩa types trong `types.ts`
-4. Commit thay đổi (`git commit -m 'feat: add amazing feature'`)
-5. Push lên branch (`git push origin feature/AmazingFeature`)
-6. Mở Pull Request
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Follow the architecture pattern and code standards
+4. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+5. Push to the branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
 
 ### Code Standards
 
-- **TypeScript**: Strict typing cho tất cả components
+- **TypeScript**: Strict typing for all components
 - **Architecture**: Feature-based structure
-- **Styling**: StyleSheet thay vì inline styles
-- **Constants**: Centralized constants thay vì hardcoded values
+- **Styling**: StyleSheet instead of inline styles
+- **Constants**: Centralized constants instead of hardcoded values
 - **Helpers**: Reusable helper functions
 
-## 📄 Giấy phép
+## 📄 License
 
-Dự án này được phân phối dưới giấy phép MIT. Xem file `LICENSE` để biết thêm chi tiết.
+This project is distributed under the MIT license. See the `LICENSE` file for more details.
 
-## 📞 Liên hệ
+## 📞 Contact
 
-- **Tác giả**: Lê Thanh Toàn
+- **Author**: Lê Thanh Toàn
 - **Email**: thanhtoan84200226@gmail.com
 - **GitHub**: github.com/LeThanhToan8422
 
-## 🙏 Lời cảm ơn
+## 🙏 Acknowledgments
 
-Cảm ơn bạn đã quan tâm đến dự án Mobile App này. Nếu có bất kỳ câu hỏi hoặc góp ý nào, vui lòng liên hệ với chúng tôi!
+Thank you for your interest in this Mobile App project. If you have any questions or suggestions, please contact us!
