@@ -36,6 +36,7 @@ export default function HomeScreen() {
     flashSaleProducts,
     hotProducts,
     recommendedProducts,
+    newArrivalsProducts,
     featuredArticles,
     handleCategoryPress,
     handleBuyNow,
@@ -223,7 +224,7 @@ export default function HomeScreen() {
               <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                data={products}
+                data={newArrivalsProducts}
                 keyExtractor={(it) => it.id + "new"}
                 ItemSeparatorComponent={() => (
                   <View style={homeStyles.itemSpacing} />
@@ -232,7 +233,6 @@ export default function HomeScreen() {
                   <MiniProductCard
                     {...renderMiniProductCard({
                       item,
-                      customSource: HOME_ASSETS.products.newArrival,
                       onPress: () =>
                         (navigation as any).navigate("ProductDetail", {
                           productId: item.id,

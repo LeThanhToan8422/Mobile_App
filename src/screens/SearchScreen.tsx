@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import ProductCard from "../components/ProductCard";
+import MiniProductCard from "../components/MiniProductCard";
 import { useSearchScreen } from "../features/search/SearchScreen.hooks";
 import { searchScreenStyles } from "../features/search/styles";
 
@@ -26,18 +26,6 @@ export default function SearchScreen() {
     },
     data: { legacyResults },
   } = useSearchScreen();
-
-  const renderProduct = ({ item, index }: { item: any; index: number }) => (
-    <View style={searchScreenStyles.productWrapper}>
-      <ProductCard
-        {...item}
-        index={index}
-        width={160}
-        onPress={() => handleProductPress(item)}
-        onBuyNowPress={() => handleBuyNow(item)}
-      />
-    </View>
-  );
 
   return (
     <View style={[searchScreenStyles.container, { paddingTop: insets.top }]}>
@@ -94,8 +82,25 @@ export default function SearchScreen() {
                 Tìm thấy {results.length} kết quả cho "{query}"
               </Text>
               <FlatList
-                data={legacyResults}
-                renderItem={renderProduct}
+                data={results}
+                renderItem={({ item, index }) => {
+                  return (
+                    <View style={searchScreenStyles.productWrapper}>
+                      <MiniProductCard
+                        source={item.thumbnail}
+                        name={item.name}
+                        price={item.price.toLocaleString("vi-VN") + "đ"}
+                        oldPrice={
+                          item.oldPrice
+                            ? item.oldPrice.toLocaleString("vi-VN") + "đ"
+                            : undefined
+                        }
+                        onPress={() => handleProductPress(item)}
+                        onBuyNowPress={() => handleBuyNow(item)}
+                      />
+                    </View>
+                  );
+                }}
                 keyExtractor={(item) => item.id}
                 numColumns={2}
                 showsVerticalScrollIndicator={false}

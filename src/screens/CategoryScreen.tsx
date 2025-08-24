@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import CategoryHeader from "@components/CategoryHeader";
 import CategoryCard from "@components/CategoryCard";
@@ -17,6 +18,7 @@ import { renderCategoryCard } from "@features/category/helpers";
 import { categoryStyles } from "@features/category/styles";
 
 export default function CategoryScreen() {
+  const navigation = useNavigation();
   const {
     leftTitles,
     selectedFilter,
@@ -32,12 +34,18 @@ export default function CategoryScreen() {
     handleViewAllSubCategory2,
   } = useCategoryScreen();
 
+  // Handle product press
+  const handleProductPress = (productId: string) => {
+    (navigation as any).navigate("ProductDetail", {
+      productId: productId,
+    });
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
       {/* Category Header with Search */}
       <CategoryHeader
         onBackPress={handleBackPress}
-        onSearchChange={handleSearchChange}
         onCameraPress={handleCameraPress}
         onNotificationPress={handleNotificationPress}
       />
@@ -123,12 +131,14 @@ export default function CategoryScreen() {
               </TouchableOpacity>
             </View>
 
-            {/* Grid sản phẩm Sub Category 1 - 3x3 */}
             <View style={categoryStyles.productGridContainer}>
               <FlatList
                 data={section1}
                 renderItem={({ item, index }) => (
-                  <CategoryCard {...renderCategoryCard({ item, index })} />
+                  <CategoryCard
+                    {...renderCategoryCard({ item, index })}
+                    onPress={() => handleProductPress(item.id)}
+                  />
                 )}
                 keyExtractor={(item) => item.id}
                 numColumns={3}
@@ -159,12 +169,14 @@ export default function CategoryScreen() {
               </TouchableOpacity>
             </View>
 
-            {/* Grid sản phẩm Sub Category 2 - 3x3 */}
             <View style={categoryStyles.productGridContainer}>
               <FlatList
                 data={section2}
                 renderItem={({ item, index }) => (
-                  <CategoryCard {...renderCategoryCard({ item, index })} />
+                  <CategoryCard
+                    {...renderCategoryCard({ item, index })}
+                    onPress={() => handleProductPress(item.id)}
+                  />
                 )}
                 keyExtractor={(item) => item.id}
                 numColumns={3}

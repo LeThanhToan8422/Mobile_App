@@ -32,12 +32,11 @@ export function useHomeScreen() {
 
   const keyExtractor = React.useCallback((it: { id: string }) => it.id, []);
 
+  // Tất cả section đều sử dụng full data products
   const flashSaleProducts = products;
   const hotProducts = products;
-  const recommendedProducts = React.useMemo(
-    () => products.slice(0, 3),
-    [products]
-  );
+  const recommendedProducts = products;
+  const newArrivalsProducts = products;
 
   const featuredArticles: FeaturedArticle[] = React.useMemo(
     () => FEATURED_ARTICLES,
@@ -78,6 +77,7 @@ export function useHomeScreen() {
     flashSaleProducts,
     hotProducts,
     recommendedProducts,
+    newArrivalsProducts,
     featuredArticles,
     handleCategoryPress,
     handleBuyNow,

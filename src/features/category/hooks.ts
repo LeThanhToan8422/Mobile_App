@@ -28,9 +28,15 @@ export function useCategoryScreen() {
     }
   }, [params]);
 
-  // Mock data
-  const section1 = useMemo(() => makeItems("s1", 9), []);
-  const section2 = useMemo(() => makeItems("s2", 9), []);
+  // Mock data - thay đổi theo filter để tạo sự đa dạng
+  const section1 = useMemo(
+    () => makeItems("s1", 9, selectedFilter),
+    [selectedFilter]
+  );
+  const section2 = useMemo(
+    () => makeItems("s2", 9, selectedFilter),
+    [selectedFilter]
+  );
 
   // Handler functions
   const handleFilterPress = (filterName: string, index: number) => {

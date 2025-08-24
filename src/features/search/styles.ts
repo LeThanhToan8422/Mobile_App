@@ -106,12 +106,14 @@ export const searchScreenStyles = StyleSheet.create({
 
   productList: {
     paddingBottom: 20,
+    paddingHorizontal: 8,
   },
 
   productWrapper: {
     flex: 1,
-    marginHorizontal: 8,
+    marginHorizontal: 4,
     marginBottom: 16,
+    alignItems: "center",
   },
 
   emptyContainer: {
